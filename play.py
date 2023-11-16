@@ -9,6 +9,6 @@ ai = train(10000)
 
 
 
-# play(ai)
+play(ai)
 
 

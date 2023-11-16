@@ -116,7 +116,7 @@ class NimAI():
         If no Q-value exists yet in `self.q`, return 0.
         """
         # self.q = ((0, 0, 0, 2), (3, 2): -1,
-        print
+        # print
         if not state or not action:
             return 0   
         # print(f"---state type= {type(state)}")
@@ -144,7 +144,7 @@ class NimAI():
         is the sum of the current reward and estimated future rewards.
         """
         if state is None or action is None:
-            print(f"---!!!!!state or action is None")
+            # print(f"---!!!!!state or action is None")
             return
    
         statetuple=tuple(state)
@@ -171,7 +171,7 @@ class NimAI():
         ='Q-table' is a dictionary mapping state-action pairs to Q-values
         """
         actions =  Nim.available_actions(state)
-        print(f"+++best_future: actions={actions} len={len(actions)})") 
+        # print(f"+++best_future: actions={actions} len={len(actions)})") 
         if not actions:
             # print(f"---no actions")
             return 0
@@ -181,13 +181,13 @@ class NimAI():
             # print(f"---action={action}")
             # print(f"---q = {self.get_q_value(state, action)})")
             qlist.append(self.get_q_value(state, action))
-        print(f"---qlist={qlist} len={len(qlist)}")
+        # print(f"---qlist={qlist} len={len(qlist)}")
         best = max(qlist)
-        print(f"---best={best}")
+        # print(f"---best={best}")
         # gamma = (1 - self.epsilon)
         gamma = 1
         result =  gamma * best
-        print(f"---result={result}")
+        # print(f"---result={result}")
         # print(f">>>best={best}")
         return result
         
@@ -240,13 +240,13 @@ class NimAI():
         # print(f">>>chooseaction={bestaction}")
         return bestaction
 
-    def printq(self,x):
-        for key,val in self.q.items():
-            # print(f"///{key[0][1]}")
-            if key[0] == x:  # enter state you want to inspect
+    # def printq(self,x):
+    #     for key,val in self.q.items():
+    #         # print(f"///{key[0][1]}")
+    #         if key[0] == x:  # enter state you want to inspect
 
-                # print(f"result = {key,':',val}")
-                print(f"result = {key} : {val}")
+    #             print(f"result = {key,':',val}")
+    #             print(f"result = {key} : {val}")
 
 def train(n):
     """
@@ -254,11 +254,11 @@ def train(n):
     """
 
     player = NimAI()
-    player0wins = 0
+    # player0wins = 0
 
     # Play n games
     for i in range(n):
-        print(f"\n-------------------------\nPlaying training game {i + 1}")
+        print(f"Playing training game {i + 1}")
         game = Nim()
         # print(f"---q dict={player.q}")
 
@@ -270,13 +270,13 @@ def train(n):
 
         # Game loop
         while True:
-            print(f"\n---player = {game.player}")
+            # print(f"\n---player = {game.player}")
 
             # Keep track of current state and action
             state = game.piles.copy()
-            print(f"---state={state}")
+            # print(f"---state={state}")
             action = player.choose_action(game.piles)
-            print(f"---action={action}")
+            # print(f"---action={action}")
 
             # Keep track of last state and action
             last[game.player]["state"] = state
@@ -291,12 +291,12 @@ def train(n):
 
             # When game is over, update Q values with rewards
             if game.winner is not None:
-                print(f"\n***winner = {game.winner} so update q")
-                if game.winner == 0:
-                    player0wins += 1 
+                # print(f"\n***winner = {game.winner} so update q")
+                # if game.winner == 0:
+                #     player0wins += 1 
                 player.update(state, action, new_state, -1)
                 # print(f"---state action = {state, action}")
-                print(f"---{state}{action} = {player.q[(tuple(state), action)]}")
+                # print(f"---{state}{action} = {player.q[(tuple(state), action)]}")
                 
 
                 player.update(
@@ -305,7 +305,7 @@ def train(n):
                     new_state,
                     1
                 )
-                print(f"---q table size = {len(player.q)}")
+                # print(f"---q table size = {len(player.q)}")
                 # print(f"---q table: {player.q}")
                 # player.printq((1,3,5,7))
                 break
@@ -320,11 +320,11 @@ def train(n):
                     0
                 )
             # print(f">>>endloop Tain")
-        firstplayerwins = player0wins/n
-        secondplayerwins = 1 - firstplayerwins
-        print(f"\n---{n} games played")
-        print(f"first player wins {firstplayerwins}")
-        print(f"second player wins {secondplayerwins}\n")
+        # firstplayerwins = player0wins/n
+        # secondplayerwins = 1 - firstplayerwins
+        # print(f"\n---{n} games played")
+        # print(f"first player wins {firstplayerwins}")
+        # print(f"second player wins {secondplayerwins}\n")
 
     print("Done training")
 
@@ -346,17 +346,17 @@ def play(ai, human_player=1):
     # Create new game
     game = Nim()
 
-    def xor(numbers):
-        xor_result = 0
-        for number in numbers:
-            print(number)
-            xor_result ^= number
-            print(f"x={xor_result}")
+    # def xor(numbers):
+    #     xor_result = 0
+    #     for number in numbers:
+    #         print(number)
+    #         xor_result ^= number
+    #         print(f"x={xor_result}")
 
-        return xor_result
+    #     return xor_result
 
-    xored = xor(game.piles)
-    print(f"xored={xored}")
+    # xored = xor(game.piles)
+    # # print(f"xored={xored}")
 
 
 
